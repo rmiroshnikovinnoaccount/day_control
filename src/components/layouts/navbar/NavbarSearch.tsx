@@ -27,7 +27,7 @@ const NavbarSearch: FC = () => {
                 type="submit"
                 aria-label="search"
                 size={ "small" }
-                sx={ { color: theme => theme.appPalette.dark } }
+                sx={ { color: theme => theme.appPalette.mainColor } }
             >
                 <SearchIcon/>
             </IconButton>

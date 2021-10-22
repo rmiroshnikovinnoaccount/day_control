@@ -79,7 +79,7 @@ const Sidebar: FC<SidebarProps> = ({ sideBarIsOpen }) => {
                                             background: location.pathname === value.path ? "#dae0ec" : undefined
                                         } }
                                     >
-                                        <Icon/>
+                                        <Icon sx={ { color: theme => theme.appPalette.mainColor } }/>
                                         <Typography
                                             sx={ {
                                                 ml: theme => theme.spacing(1),

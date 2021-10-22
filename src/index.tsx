@@ -11,13 +11,16 @@ declare module "@mui/material/styles" {
     interface Theme {
         appPalette: {
             container: string
-            dark: string
+            mainColor: string
+            contentSection: string
         };
     }
+
     interface ThemeOptions {
         appPalette?: {
             container: string
-            dark: string
+            mainColor: string
+            contentSection: string
         };
     }
 }
@@ -25,7 +28,8 @@ declare module "@mui/material/styles" {
 const theme = createTheme({
     appPalette: {
         container: "#f3f6fd",
-        dark: "#1f1c2e"
+        mainColor: "#1f1c2e",
+        contentSection: "#fff"
     }
 });
 

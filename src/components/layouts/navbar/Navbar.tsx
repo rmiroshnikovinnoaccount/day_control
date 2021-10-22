@@ -36,7 +36,7 @@ const Navbar: FC<HeaderProps> = ({ setSideBarIsOpen }) => {
             >
                 <NotesRoundedIcon
                     sx={ {
-                        color: theme => theme.appPalette.dark,
+                        color: theme => theme.appPalette.mainColor,
                         cursor: "pointer"
                     } }
                     onClick={ () => setSideBarIsOpen(prevState => !prevState) }
@@ -46,7 +46,7 @@ const Navbar: FC<HeaderProps> = ({ setSideBarIsOpen }) => {
                     sx={ {
                         margin: theme => theme.spacing(0, 3),
                         fontWeight: "500",
-                        color: theme => theme.appPalette.dark
+                        color: theme => theme.appPalette.mainColor
                     } }
                 >
                     Project Name
@@ -59,7 +59,7 @@ const Navbar: FC<HeaderProps> = ({ setSideBarIsOpen }) => {
                         const Icon = value.Icon;
                         return (
                             <IconButton size="small" key={ i }>
-                                <Icon sx={ { color: theme => theme.appPalette.dark } }/>
+                                <Icon sx={ { color: theme => theme.appPalette.mainColor } }/>
                             </IconButton>
                         );
                     })

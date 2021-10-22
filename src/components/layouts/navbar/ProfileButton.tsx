@@ -26,7 +26,7 @@ const ProfileButton: FC = () => {
             <Typography
                 sx={ {
                     fontWeight: 500,
-                    color: theme => theme.appPalette.dark
+                    color: theme => theme.appPalette.mainColor
                 } }
             >
                 Miroshnikov R.
