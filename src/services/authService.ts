@@ -49,7 +49,7 @@ export const authApi = createApi({
                 } finally {
                     dispatch(setGlobalLoading(false));
                 }
-            }
+            },
         })
     })
 });
