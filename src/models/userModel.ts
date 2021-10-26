@@ -1,29 +1,16 @@
-export interface IGeo {
-    lat: string;
-    lng: string;
-}
-
-export interface IAddress {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: IGeo;
-}
-
-export interface ICompany {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-}
-
 export interface IUser {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    phone: string;
-    website: string;
-    company: ICompany;
-    address: IAddress
+    roles: string[]
+    uuid: string
+    email: string
+    username: string
+    status: "ACTIVE" | "LOCKED" | "EXPIRED"
+    firstName: string
+    lastName: string
+}
+
+export interface ILoginResponse {
+    accessToken: string
+    expiryDuration: number
+    refreshToken: string
+    type: string
 }
