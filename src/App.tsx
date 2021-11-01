@@ -7,8 +7,10 @@ import Login from "./pages/login/Login";
 import { authApi } from "./services/authService";
 
 const App: FC = () => {
+
     const { user, globalLoading } = useAppSelector(state => state.auth);
     authApi.useFetchProfileQuery()
+
     if (globalLoading) {
         return <div>Loading</div>;
     }

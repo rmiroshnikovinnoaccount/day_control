@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useState } from "react";
 import { Box, Button, IconButton, InputAdornment, Paper, Typography } from "@mui/material";
-import { flexCenter, flexStyles } from "../../utils/styleUtils";
+import { flexCenter, flexStyles, standardShadow } from "../../utils/styleUtils";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { AppTextField } from "../../components/UI/AppInput";
@@ -30,9 +30,10 @@ const Login: FC = () => {
             <Paper
                 elevation={ 0 }
                 sx={ {
-                    p: theme => theme.spacing(2),
+                    p: theme => theme.spacing(5),
                     borderRadius: theme => theme.spacing(3),
-                    transition: "all 1s ease-out"
+                    transition: "all 1s ease-out",
+                    ...standardShadow
                 } }
             >
                 <Box
@@ -40,9 +41,8 @@ const Login: FC = () => {
                     sx={ flexStyles("center", "center", "column") }
                     onSubmit={ onLogin }
                 >
-
-                    <Typography variant={ "h5" } sx={ { fontWeight: 500, color: theme => theme.appPalette.mainColor } }>
-                        Log In
+                    <Typography variant={ "h5" } sx={ { fontWeight: 400, color: theme => theme.appPalette.mainColor, my: 2 } }>
+                        Вход
                     </Typography>
                     <AppTextField
                         variant="outlined"

@@ -7,18 +7,21 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import ProfileButton from "./ProfileButton";
 import { flexStyles } from "../../../utils/styleUtils";
+import { useColorMode } from "../../../ColorModeContextProvider";
 
 type HeaderProps = {
     setSideBarIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const controls = [
-    { Icon: DarkModeOutlinedIcon },
     { Icon: AddCircleRoundedIcon },
     { Icon: NotificationsNoneRoundedIcon }
 ];
 
 const Navbar: FC<HeaderProps> = ({ setSideBarIsOpen }) => {
+
+    const { toggleColorMode } = useColorMode();
+
     return (
         <Box
             sx={ {
@@ -54,6 +57,9 @@ const Navbar: FC<HeaderProps> = ({ setSideBarIsOpen }) => {
                 <NavbarSearch/>
             </Box>
             <Box sx={ flexStyles("center") }>
+                <IconButton size="small" onClick={ toggleColorMode }>
+                    <DarkModeOutlinedIcon/>
+                </IconButton>
                 {
                     controls.map((value, i) => {
                         const Icon = value.Icon;

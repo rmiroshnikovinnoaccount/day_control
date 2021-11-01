@@ -13,7 +13,7 @@ const Layout: FC = ({ children }) => {
                 ...flexStyles("center", "center"),
                 backgroundColor: theme => theme.appPalette.container,
                 width: "100%",
-                height: "100vh"
+                height: "100vh",
             } }
         >
             <Box
@@ -22,7 +22,7 @@ const Layout: FC = ({ children }) => {
                     backgroundColor: theme => theme.appPalette.container,
                     width: "100%",
                     height: "100%",
-                    maxWidth: "1800px"
+                    maxWidth: "1800px",
                 } }
             >
                 <Navbar setSideBarIsOpen={ setSideBarIsOpen }/>
@@ -42,7 +42,6 @@ const Layout: FC = ({ children }) => {
                             flex: 2,
                             p: theme => theme.spacing(3, 3, 0, 3),
                             borderRadius: theme => theme.spacing(3),
-                            transition: "all 1s ease-out",
                             overflow: "auto",
                             height: "100%"
                         } }

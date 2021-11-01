@@ -1,25 +1,23 @@
 import React, { FC } from "react";
-import Calendar from "../../pages/calendar/Calendar";
-import Settings from "../../pages/settings/Settings";
-import Statistics from "../../pages/statistics/Statistics";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Home from "../../pages/home/Home";
+import { useRoleManager } from "../../utils/roleUtils";
+import { routes } from "./routes";
 
 const Routing: FC = () => {
+    const hasAnyRole = useRoleManager();
+
     return (
         <Switch>
-            <Route exact path="/">
-                <Home/>
-            </Route>
-            <Route exact path="/calendar">
-                <Calendar/>
-            </Route>
-            <Route exact path="/settings">
-                <Settings/>
-            </Route>
-            <Route exact path="/statistics">
-                <Statistics/>
-            </Route>
+            {
+                routes.map(route => {
+                    const Component = route.Component;
+                    return (
+                        <Route exact={ route.exact } path={ route.path } key={ route.path }>
+                            { hasAnyRole(route.roles) ? <Component/> : <Redirect to={ "/" }/> }
+                        </Route>
+                    );
+                })
+            }
             <Redirect to={ "/" }/>
         </Switch>
     );

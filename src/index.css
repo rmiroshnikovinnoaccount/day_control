@@ -85,3 +85,7 @@ select {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
 }
+
+* {
+    transition: color 0.4s ease, background-color 0.4s ease, background 0.4s ease;
+}

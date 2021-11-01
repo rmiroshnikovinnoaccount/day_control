@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { setupStore } from "./store/store";
 import { Provider } from "react-redux";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { store } from "./store/store";
+import ColorModeContextProvider from "./ColorModeContextProvider";
 
 declare module "@mui/material/styles" {
     interface Theme {
@@ -25,25 +25,15 @@ declare module "@mui/material/styles" {
     }
 }
 
-const theme = createTheme({
-    appPalette: {
-        container: "#f3f6fd",
-        mainColor: "#1f1c2e",
-        contentSection: "#fff"
-    }
-});
-
-const store = setupStore();
-
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={ theme }>
-            <Provider store={ store }>
-                <BrowserRouter>
+        <Provider store={ store }>
+            <BrowserRouter>
+                <ColorModeContextProvider>
                     <App/>
-                </BrowserRouter>
-            </Provider>
-        </ThemeProvider>
+                </ColorModeContextProvider>
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );

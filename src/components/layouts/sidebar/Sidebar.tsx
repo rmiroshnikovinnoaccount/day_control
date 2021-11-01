@@ -1,45 +1,21 @@
 import React, { FC } from "react";
 import { Box, Typography } from "@mui/material";
-import HouseOutlinedIcon from "@mui/icons-material/HouseOutlined";
-import PieChartOutlineRoundedIcon from "@mui/icons-material/PieChartOutlineRounded";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { LightTooltip } from "../../UI/LightTooltip";
 import { useHistory, useLocation } from "react-router-dom";
 import { flexStyles } from "../../../utils/styleUtils";
+import { useColorMode } from "../../../ColorModeContextProvider";
+import { useRoleManager } from "../../../utils/roleUtils";
+import { routes } from "../../routes/routes";
 
 type SidebarProps = {
     sideBarIsOpen: boolean
 }
 
-const items = [
-    {
-        Icon: HouseOutlinedIcon,
-        title: "Главная",
-        path: "/"
-    },
-    {
-        Icon: PieChartOutlineRoundedIcon,
-        title: "Статистика",
-        path: "/statistics"
-    },
-    {
-        Icon: CalendarTodayIcon,
-        title: "Календарь",
-        path: "/calendar"
-    },
-    {
-        Icon: SettingsOutlinedIcon,
-        title: "Настройки",
-        path: "/settings"
-    }
-];
-
 const Sidebar: FC<SidebarProps> = ({ sideBarIsOpen }) => {
-
+    const hasAnyRole = useRoleManager();
     const history = useHistory();
     const location = useLocation();
-
+    const { mode } = useColorMode();
     return (
         <Box
             sx={ {
@@ -50,12 +26,21 @@ const Sidebar: FC<SidebarProps> = ({ sideBarIsOpen }) => {
         >
             <Box component={ "ul" }>
                 {
-                    items.map(value => {
+                    routes.map(value => {
+
+                        if (!(value.Icon && value.title)) {
+                            return null;
+                        }
+
+                        if (!hasAnyRole(value.roles)) {
+                            return null;
+                        }
+
                         const Icon = value.Icon;
                         return (
                             <LightTooltip
-                                key={ value.title }
-                                title={ value.title }
+                                key={ value.title! }
+                                title={ value.title! }
                                 placement="right"
                                 disableHoverListener={ sideBarIsOpen }
                             >
@@ -79,14 +64,27 @@ const Sidebar: FC<SidebarProps> = ({ sideBarIsOpen }) => {
                                             background: location.pathname === value.path ? "#dae0ec" : undefined
                                         } }
                                     >
-                                        <Icon sx={ { color: theme => theme.appPalette.mainColor } }/>
+                                        <Icon sx={ {
+                                            color: theme => (
+                                                location.pathname === value.path && mode === "dark" ?
+                                                    "#1f1c2e"
+                                                    :
+                                                    theme.appPalette.mainColor
+                                            )
+                                        } }/>
                                         <Typography
                                             sx={ {
                                                 ml: theme => theme.spacing(1),
                                                 whiteSpace: "nowrap",
                                                 transition: "0.35s",
                                                 opacity: sideBarIsOpen ? 1 : 0,
-                                                pointerEvents: sideBarIsOpen ? "auto" : "none"
+                                                pointerEvents: sideBarIsOpen ? "auto" : "none",
+                                                color: theme => (
+                                                    location.pathname === value.path && mode === "dark" ?
+                                                        "#1f1c2e"
+                                                        :
+                                                        theme.appPalette.mainColor
+                                                )
                                             } }
                                         >
                                             { value.title }

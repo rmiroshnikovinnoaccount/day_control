@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import auth from "./slices/auth";
 import { authApi } from "../services/authService";
 import { testApi } from "../services/testService";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -9,15 +10,14 @@ const rootReducer = combineReducers({
     auth
 });
 
-export const setupStore = () => {
-    return configureStore({
-        reducer: rootReducer,
-        middleware: getDefaultMiddleware => getDefaultMiddleware()
-        .concat(authApi.middleware)
-        .concat(testApi.middleware)
-    });
-};
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware()
+    .concat(authApi.middleware)
+    .concat(testApi.middleware)
+});
+
+setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore["dispatch"]
+export type AppDispatch = typeof store.dispatch
